@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card } from './types';
-import { INITIAL_CARDS, ADMIN_PASSWORD } from './constants';
-import { storageService } from './supabaseService';
-import UserPage from './components/UserPage';
-import AdminDashboard from './components/AdminDashboard';
-import LoginModal from './components/LoginModal';
+import { Card } from './types.ts';
+import { INITIAL_CARDS, ADMIN_PASSWORD } from './constants.ts';
+import { storageService } from './supabaseService.ts';
+import UserPage from './components/UserPage.tsx';
+import AdminDashboard from './components/AdminDashboard.tsx';
+import LoginModal from './components/LoginModal.tsx';
 
 const App: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
@@ -77,7 +77,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
       <header className="bg-white border-b sticky top-0 z-40 px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-kt-red rounded-full flex items-center justify-center text-white font-bold text-xs italic">KT</div>
@@ -93,7 +92,6 @@ const App: React.FC = () => {
         )}
       </header>
 
-      {/* Main Content */}
       <main className="flex-1 pb-20">
         {isAdmin ? (
           <AdminDashboard cards={cards} onUpdate={saveCards} />
@@ -102,7 +100,6 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Footer */}
       {!isAdmin && (
         <footer className="p-8 text-center bg-gray-100 mt-10">
           <p className="text-xs text-gray-400 mb-4">본 안내는 제휴카드사 사정에 따라 변경될 수 있습니다.</p>
@@ -115,7 +112,6 @@ const App: React.FC = () => {
         </footer>
       )}
 
-      {/* Modals */}
       {showLogin && (
         <LoginModal 
           onClose={() => setShowLogin(false)} 

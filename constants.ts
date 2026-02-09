@@ -5,8 +5,8 @@ export const ADMIN_PASSWORD = "8999";
 
 // Supabase Configuration
 // To enable cloud storage, fill in these values from your Supabase Project Settings
-export const SUPABASE_URL = "https://nmlxgnvfvamighheypcs.supabase.co"; 
-export const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tbHhnbnZmdmFtaWdoaGV5cGNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2MDUxMDksImV4cCI6MjA4NjE4MTEwOX0.2iShiRDPDmwodn60cKb6SCl9xyci9dTF6fPVjoUcHtI";
+export const SUPABASE_URL = ""; 
+export const SUPABASE_ANON_KEY = "";
 
 export const INITIAL_CARDS: Card[] = [
   {

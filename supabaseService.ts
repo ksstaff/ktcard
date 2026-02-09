@@ -1,7 +1,7 @@
 
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './constants';
-import { Card } from './types';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './constants.ts';
+import { Card } from './types.ts';
 
 const isConfigured = SUPABASE_URL && SUPABASE_ANON_KEY;
 const supabase = isConfigured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
@@ -26,7 +26,6 @@ export const storageService = {
   async saveCards(cards: Card[]): Promise<boolean> {
     if (!supabase) return false;
     
-    // We update the whole collection by including an order_index
     const payload = cards.map((card, index) => ({
       ...card,
       order_index: index
