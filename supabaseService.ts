@@ -1,7 +1,7 @@
 
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './constants.ts';
-import { Card } from './types.ts';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './constants';
+import { Card } from './types';
 
 const isConfigured = SUPABASE_URL && SUPABASE_ANON_KEY;
 const supabase = isConfigured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;

@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card } from './types.ts';
-import { INITIAL_CARDS, ADMIN_PASSWORD } from './constants.ts';
-import { storageService } from './supabaseService.ts';
-import UserPage from './components/UserPage.tsx';
-import AdminDashboard from './components/AdminDashboard.tsx';
-import LoginModal from './components/LoginModal.tsx';
+import { Card } from './types';
+import { INITIAL_CARDS, ADMIN_PASSWORD } from './constants';
+import { storageService } from './supabaseService';
+import UserPage from './components/UserPage';
+import AdminDashboard from './components/AdminDashboard';
+import LoginModal from './components/LoginModal';
 
 const App: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
@@ -16,27 +16,32 @@ const App: React.FC = () => {
   useEffect(() => {
     const initData = async () => {
       setIsLoading(true);
-      if (storageService.isCloudEnabled()) {
-        const cloudCards = await storageService.fetchCards();
-        if (cloudCards && cloudCards.length > 0) {
-          setCards(cloudCards);
-          setIsLoading(false);
-          return;
+      try {
+        if (storageService.isCloudEnabled()) {
+          const cloudCards = await storageService.fetchCards();
+          if (cloudCards && cloudCards.length > 0) {
+            setCards(cloudCards);
+            setIsLoading(false);
+            return;
+          }
         }
-      }
 
-      // Fallback to LocalStorage
-      const savedCards = localStorage.getItem('kt_cards_data');
-      if (savedCards) {
-        try {
-          setCards(JSON.parse(savedCards));
-        } catch (e) {
+        const savedCards = localStorage.getItem('kt_cards_data');
+        if (savedCards) {
+          try {
+            setCards(JSON.parse(savedCards));
+          } catch (e) {
+            setCards(INITIAL_CARDS);
+          }
+        } else {
           setCards(INITIAL_CARDS);
         }
-      } else {
+      } catch (error) {
+        console.error("Initialization error:", error);
         setCards(INITIAL_CARDS);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     initData();
